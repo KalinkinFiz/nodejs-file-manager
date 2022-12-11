@@ -1,10 +1,9 @@
 import os from "os";
-import { stdout } from "process";
 
 export const castomOS = (param) => {
   switch (param) {
     case "EOL": {
-      stdout.write(`${param}: ${JSON.stringify(os.EOL)}\n`);
+      console.log(`${param}: ${JSON.stringify(os.EOL)}`);
       break;
     }
     case "cpus": {
@@ -13,27 +12,27 @@ export const castomOS = (param) => {
       console.table(
         cpus.map(({ speed, model }) => {
           const speedGHz = (speed / 1000).toFixed(2);
-          return { model, speed: speedGHz };
+          return { model, speed: `${speedGHz} GHz` };
         })
       );
       break;
     }
     case "homedir": {
-      stdout.write(`${param}: ${os.homedir()}\n`);
+      console.log(`${param}: ${os.homedir()}`);
       break;
     }
     case "username": {
-      stdout.write(`${param}: ${os.userInfo().username}\n`);
+      console.log(`${param}: ${os.userInfo().username}`);
       break;
     }
     case "architecture": {
-      stdout.write(`${param}: ${os.arch()}\n`);
+      console.log(`${param}: ${os.arch()}`);
       break;
     }
     default: {
-      stdout.write("Invalid input\n");
+      console.log("Invalid input");
     }
   }
 };
 
-castomOS("architecture");
+castomOS("cpus");
