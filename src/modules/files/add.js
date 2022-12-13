@@ -4,7 +4,7 @@ export const add = async (newFileName) => {
   try {
     await writeFile(newFileName, "");
   } catch {
-    throw new Error("Operation failed.");
+    throw new Error("Operation failed");
   }
 };
 
