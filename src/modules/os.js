@@ -1,6 +1,6 @@
 import os from "os";
 
-export const castomOS = (param) => {
+export const castomOS = async (param) => {
   switch (param) {
     case "EOL": {
       console.log(`${param}: ${JSON.stringify(os.EOL)}`);

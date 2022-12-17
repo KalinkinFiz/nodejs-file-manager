@@ -6,22 +6,23 @@ await modules.cat("./modules/os.js");
 await modules.copy("./ad.txt", "../");
 await modules.mv("./ad.txt", "../");
 await modules.rename("../ad.txt", "ttt.md");
-await modules.remove("../ad.txt");
+await modules.remove("../ttt.md");
 
 // nwd
-await modules.ls("../../");
+await modules.ls("./modules");
 await modules.up("c:\\Users\\kalin");
 
-// zip
+// // zip
 await modules.compress("./modules/calcHash.js", "./");
-await modules.decompress("./modules/calcHash.js.br", "./");
+await modules.decompress("./calcHash.js.br", "./");
 
-// hash
+// // hash
 await modules.calcHash("./modules/files/cat.js");
 
-// os
-modules.castomOS("cpus");
+// // os
+await modules.castomOS("cpus");
 
-// clear testing data
+// // clear testing data
 await modules.remove("./ttt.md");
-await modules.remove("./modules/calcHash.js.br");
+await modules.remove("./calcHash.js.br");
+await modules.remove("./calcHash.js");
