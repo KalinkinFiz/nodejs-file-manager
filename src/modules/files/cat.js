@@ -1,15 +1,19 @@
 import { createReadStream } from "fs";
-import { stdout } from "process";
-import { finished } from "stream/promises";
+
+const createReadStreamAsync = (pathToFile, options = {}) =>
+  new Promise((resolve, reject) => {
+    let data = "";
+
+    createReadStream(pathToFile, options)
+      .on("data", (chunk) => (data += chunk))
+      .on("error", (error) => reject(error))
+      .on("end", () => resolve(data));
+  });
 
 export const cat = async (pathToFile) => {
   try {
-    const readableStream = createReadStream(pathToFile);
-
-    readableStream.on("data", (chunk) => {
-      stdout._write(chunk);
-    });
-    await finished(readableStream);
+    const data = await createReadStreamAsync(pathToFile);
+    console.log(data);
   } catch {
     throw new Error("Operation failed");
   }
