@@ -17,5 +17,3 @@ export const copy = async (pathToFile, pathToNewDirectory) => {
     throw new Error("Operation failed");
   }
 };
-
-await copy("./ad.txt", "../");

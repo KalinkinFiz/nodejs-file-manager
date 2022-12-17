@@ -7,5 +7,3 @@ export const rename = async (pathToFile, newFileName) => {
     throw new Error("Operation failed");
   }
 };
-
-await rename("ad.txt", "ttt.md");

@@ -9,12 +9,12 @@ export const castomOS = (param) => {
     case "cpus": {
       const cpus = os.cpus();
 
-      console.table(
-        cpus.map(({ speed, model }) => {
-          const speedGHz = (speed / 1000).toFixed(2);
-          return { model, speed: `${speedGHz} GHz` };
-        })
-      );
+      const result = cpus.map(({ speed, model }) => {
+        const speedGHz = (speed / 1000).toFixed(2);
+        return { model, speed: `${speedGHz} GHz` };
+      });
+
+      console.table(result);
       break;
     }
     case "homedir": {
@@ -34,5 +34,3 @@ export const castomOS = (param) => {
     }
   }
 };
-
-castomOS("cpus");

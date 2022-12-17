@@ -1,23 +1,26 @@
 import fs from "fs/promises";
 import path from "path";
 
+const TYPES = {
+  DIRECTORY: "directory",
+  FILE: "file",
+};
+
 export const ls = async (dir) => {
   const files = await fs.readdir(path.join(dir), { withFileTypes: true });
 
   const preparedFiles = files.map((file) => ({
-    Name: file.name,
-    Type: file.isDirectory() ? "directory" : "file",
+    name: file.name,
+    type: file.isDirectory() ? TYPES.DIRECTORY : TYPES.FILE,
   }));
-  const sortedFiles = preparedFiles.sort((firstFile, secondFile) => {
-    if (firstFile.Type === secondFile.Type) {
-      return firstFile.Name > secondFile.Name ? 1 : -1;
-    } else {
-      return firstFile.Type > secondFile.Type ? 1 : -1;
+
+  const result = preparedFiles.sort((file1, file2) => {
+    if (file1.type === file2.type) {
+      return file1.name.localeCompare(file2.name);
     }
+    return file1.type.localeCompare(file2.type);
   });
 
-  console.log(`Files in directory ${dir}:`);
-  console.table(sortedFiles);
+  console.log(`Files in directory "${dir}":`);
+  console.table(result);
 };
-
-await ls("../../");

@@ -18,5 +18,3 @@ export const cat = async (pathToFile) => {
     throw new Error("Operation failed");
   }
 };
-
-cat("../os.js");

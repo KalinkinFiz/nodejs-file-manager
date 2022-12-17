@@ -15,5 +15,3 @@ export const calcHash = async (pathToFile) => {
     throw new Error("Operation failed");
   }
 };
-
-await calcHash("./files/cat.js");
