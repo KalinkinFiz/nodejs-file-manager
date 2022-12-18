@@ -1,7 +1,15 @@
 import os from "os";
 
 export const castomOS = async (param) => {
-  switch (param) {
+  const isCommandWrong = param.startsWith("--");
+
+  if (!isCommandWrong) {
+    throw new Error("Invalid input");
+  }
+
+  const command = param.replace("--", "");
+
+  switch (command) {
     case "EOL": {
       console.log(`${param}: ${JSON.stringify(os.EOL)}`);
       break;
