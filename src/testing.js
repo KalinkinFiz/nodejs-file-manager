@@ -5,7 +5,7 @@ await modules.add("ad.txt");
 await modules.cat("./modules/os.js");
 await modules.copy("./ad.txt", "../");
 await modules.mv("./ad.txt", "../");
-await modules.rename("../ad.txt", "ttt.md");
+await modules.ren("../ad.txt", "ttt.md");
 await modules.remove("../ttt.md");
 
 // nwd

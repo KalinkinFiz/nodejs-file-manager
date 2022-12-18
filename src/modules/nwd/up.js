@@ -1,7 +1,7 @@
-import path from "path";
-import { homedir } from "os";
-
-export const up = async (currentPath) => {
-  const { root } = path.parse(homedir());
-  return currentPath === root ? currentPath : path.join(currentPath, "../");
+export const up = async () => {
+  try {
+    process.chdir("..");
+  } catch {
+    throw new Error("Operation failed");
+  }
 };

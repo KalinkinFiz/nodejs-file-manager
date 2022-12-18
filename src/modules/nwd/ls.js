@@ -6,8 +6,10 @@ const TYPES = {
   FILE: "file",
 };
 
-export const ls = async (dir) => {
-  const files = await fs.readdir(path.join(dir), { withFileTypes: true });
+export const ls = async () => {
+  const files = await fs.readdir(path.join(process.cwd()), {
+    withFileTypes: true,
+  });
 
   const preparedFiles = files.map((file) => ({
     name: file.name,
@@ -21,6 +23,5 @@ export const ls = async (dir) => {
     return file1.type.localeCompare(file2.type);
   });
 
-  console.log(`Files in directory "${dir}":`);
   console.table(result);
 };

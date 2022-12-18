@@ -1,3 +1,4 @@
+import path from "path";
 import { createReadStream } from "fs";
 
 const createReadStreamAsync = (pathToFile, options = {}) =>
@@ -12,6 +13,10 @@ const createReadStreamAsync = (pathToFile, options = {}) =>
 
 export const cat = async (pathToFile) => {
   try {
+    pathToFile = path.isAbsolute(pathToFile)
+      ? pathToFile
+      : path.join(process.cwd(), pathToFile);
+
     const data = await createReadStreamAsync(pathToFile);
     console.log(data);
   } catch {

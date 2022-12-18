@@ -1,5 +1,6 @@
 import path from "path";
 import { createReadStream, createWriteStream } from "fs";
+import { stat } from "fs/promises";
 import { createBrotliDecompress } from "zlib";
 import { pipeline } from "stream";
 import { promisify } from "util";
@@ -10,6 +11,14 @@ const SEPARATOR = path.sep;
 
 export const decompress = async (pathToFile, pathToDestination) => {
   try {
+    pathToFile = path.isAbsolute(pathToFile)
+      ? pathToFile
+      : path.join(process.cwd(), pathToFile);
+
+    pathToDestination = path.isAbsolute(pathToDestination)
+      ? pathToDestination
+      : path.join(process.cwd(), pathToDestination);
+
     const fileNames = pathToFile.split(SEPARATOR);
 
     let fileName = "";
@@ -17,6 +26,12 @@ export const decompress = async (pathToFile, pathToDestination) => {
     else throw new Error("No file");
 
     if (!fileName.endsWith(".br")) throw new Error("No br file");
+
+    const stats = await stat(fileName);
+
+    if (!stats.isFile()) {
+      throw new Error("No file");
+    }
 
     fileName = fileName.slice(0, -3);
 
