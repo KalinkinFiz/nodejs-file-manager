@@ -4,3 +4,4 @@ export * from "./zip/index.js";
 
 export * from "./calcHash.js";
 export * from "./os.js";
+export * from "./user.js";

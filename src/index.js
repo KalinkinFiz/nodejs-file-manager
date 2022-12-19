@@ -11,11 +11,10 @@ export const readline = async (args) => {
     return;
   }
 
-  const param = args.slice(2).split("=");
-  const [key, username] = param;
+  const userName = modules.getUserName();
 
-  if (key === "username") {
-    console.log(`Welcome to the File Manager, ${username}!`);
+  if (userName.length) {
+    console.log(`Welcome to the File Manager, ${userName}!`);
     process.chdir(homedir());
     console.log(`You are currently in ${process.cwd()}`);
   } else {
@@ -39,7 +38,7 @@ export const readline = async (args) => {
       switch (command) {
         case ".exit": {
           rl.close();
-          break;
+          return;
         }
         case "cat": {
           await modules.cat(argument);
@@ -104,7 +103,7 @@ export const readline = async (args) => {
   });
 
   rl.on("close", () =>
-    console.log(`Thank you for using File Manager, ${username}, goodbye!`)
+    console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
   );
 };
 
